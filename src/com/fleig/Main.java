@@ -59,12 +59,12 @@ public class Main {
 //                System.out.print("ini>> " + time);
 
                 String send = sendUDP("PING " + i + " " + time + "\r\n");
-                System.out.print(send);
+//                System.out.print(send);
 
                 LocalTime timeAft = LocalTime.now();
                 long rtt = time.until(timeAft, ChronoUnit.MILLIS);
 
-//                System.out.println(send + "\t" + rtt + "ms");
+                System.out.println(send.replace("\r\n","") + "\t" + rtt + "ms");
 
                 totRtt += rtt;
                 if(rtt < minRtt)
@@ -75,6 +75,8 @@ public class Main {
 
             @Override
             public boolean cancel() {
+                System.out.println();
+                System.out.println("---- Statistics ----");
                 System.out.println("minRtt: " + minRtt + " maxRtt: " + maxRtt + " avgRtt: " + totRtt/numPing);
 
                 System.out.println("------END-----");
